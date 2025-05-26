@@ -1,14 +1,14 @@
 import { useEffect, useRef } from "react";
 export default function DisplayMessage({ message, usersList }) {
   const toastRef = useRef(null);
-  const bsToast = useRef(null);
+
   useEffect(() => {
     if (toastRef.current && message) {
-      bsToast.current = new window.bootstrap.Toast(toastRef.current, {
+      const toast = new window.bootstrap.Toast(toastRef.current, {
         autohide: true,
         delay: 4000,
       });
-      bsToast.current.show();
+      toast.show();
     }
   }, [usersList]);
   return (
