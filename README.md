@@ -1,12 +1,9 @@
-# React + Vite
+# itransition-task4-frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Note
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- The whole system is handled by `App.jsx`
+- `main.jsx` contains all the components
+- All the reusable components are in the `components` folder under `src` folder
+- All the pages are in the `features` folder
+- Each page component is in the sub-folder relevant to its function (e.g., `login.jsx` is in the `auth` sub-folder under `features` folder)
