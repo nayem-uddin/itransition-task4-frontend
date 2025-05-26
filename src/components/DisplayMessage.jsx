@@ -1,33 +1,14 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 export default function DisplayMessage({ message, usersList }) {
-  const toastRef = useRef(null);
-
+  const [displayMessage, setDisplayMessage] = useState(message);
   useEffect(() => {
-    if (toastRef.current && message) {
-      const toast = new window.bootstrap.Toast(toastRef.current, {
-        autohide: true,
-        delay: 4000,
-      });
-      toast.show();
-    }
-  }, [usersList]);
+    setTimeout(() => {
+      setDisplayMessage("");
+    }, 3000);
+  }, []);
   return (
-    <div
-      ref={toastRef}
-      className="toast align-items-center m-auto"
-      role="alert"
-      aria-live="assertive"
-      aria-atomic="true"
-    >
-      <div className="d-flex">
-        <div className="toast-body">{message}</div>
-        <button
-          type="button"
-          className="btn-close me-2 m-auto"
-          data-bs-dismiss="toast"
-          aria-label="Close"
-        ></button>
-      </div>
-    </div>
+    <>
+      <p className="text-center">{displayMessage}</p>
+    </>
   );
 }
