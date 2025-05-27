@@ -35,7 +35,9 @@ export default function AdminPage() {
           <Toolbar />
           <DisplayUsers
             users={usersList.allUsers.toSorted((user1, user2) =>
-              user1.firstName > user2.firstName ? 1 : -1
+              user1.firstName.toLowerCase() > user2.firstName.toLowerCase()
+                ? 1
+                : -1
             )}
             handleChange={handleAllusers}
           />
