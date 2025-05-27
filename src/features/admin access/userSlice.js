@@ -33,6 +33,7 @@ const userSlice = createSlice({
     },
     clearAtLogin: (state) => {
       state.message = null;
+      state.usersList.selectedUsers = [];
     },
   },
   extraReducers: (builder) => {
