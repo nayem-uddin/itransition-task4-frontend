@@ -19,7 +19,7 @@ export default function DeleteButton() {
     if (!newUserStatus || newUserStatus.status === "blocked") {
       setTimeout(() => {
         navigate("/", { replace: true });
-      }, 5000);
+      }, 3000);
     }
   }
   return (

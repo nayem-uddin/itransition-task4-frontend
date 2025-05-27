@@ -2,14 +2,12 @@ import { useState } from "react";
 import TextInput from "../../../components/TextInput";
 import PassInput from "../../../components/PassInput";
 import { useNavigate, Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import styles from "../login/form-style.module.css";
 import DisplayMessage from "../../../components/DisplayMessage";
 export default function Signup() {
   const [userInfo, setUserInfo] = useState({});
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   function updateUserInfo(field, value) {
     setUserInfo({ ...userInfo, [field]: value });
   }
@@ -35,12 +33,12 @@ export default function Signup() {
       );
       const data = await res.json();
       if (!res.ok) {
-        setErrorMessage(data.message);
+        alert(data.message);
       } else {
         navigate("/", { replace: true });
       }
     } catch (err) {
-      setErrorMessage("try again");
+      alert("Try again");
     }
   }
   return (

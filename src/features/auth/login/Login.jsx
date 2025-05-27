@@ -3,14 +3,10 @@ import TextInput from "../../../components/TextInput";
 import styles from "./form-style.module.css";
 import PassInput from "../../../components/PassInput";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { clearAtLogin } from "../../admin access/userSlice";
 import DisplayMessage from "../../../components/DisplayMessage";
 
 export default function Login() {
-  const [errorMessage, setErrorMessage] = useState("");
   const [userInfo, setUserInfo] = useState({});
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   function updateUserInfo(field, value) {
     setUserInfo({
@@ -33,21 +29,20 @@ export default function Login() {
         {
           method: "POST",
           headers: {
-            "content-type": "application/json",
+            "Content-type": "application/json",
           },
           body: JSON.stringify({ ...userInfo, lastLogin }),
         }
       );
       const data = await res.json();
       if (!res.ok) {
-        setErrorMessage(data.message);
+        alert(data.message);
       } else {
         sessionStorage.setItem("email", userInfo.email);
         navigate("/admin", { replace: true });
-        dispatch(clearAtLogin());
       }
     } catch (err) {
-      setErrorMessage("try again");
+      alert("Try again");
     }
   }
   return (
@@ -73,7 +68,7 @@ export default function Login() {
             New user? <Link to="/register">Sign up</Link> instead.{" "}
           </p>
         </fieldset>
-        {errorMessage && <DisplayMessage message={errorMessage} />}
+        {/* {errorMessage && <DisplayMessage message={errorMessage} />} */}
       </form>
     </>
   );
