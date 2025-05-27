@@ -33,8 +33,6 @@ export default function DeleteButton() {
           selectedUsers,
         })
       );
-
-      alert("Successfully deleted.");
     } else {
       alert("Failed to fetch user data.");
     }

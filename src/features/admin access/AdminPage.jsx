@@ -17,9 +17,22 @@ export default function AdminPage() {
   );
   const dispatch = useDispatch();
   useEffect(() => {
-    if (!sessionStorage.getItem("email")) {
-      navigate("/", { replace: true });
+    async function verifyUser() {
+      if (!sessionStorage.getItem("email")) {
+        navigate("/", { replace: true });
+      }
+      const res = await fetch(
+        "https://itransition-task4-backend-gxbs.onrender.com/"
+      );
+      const users = await res.json();
+      const userStatus = await users.users.find(
+        (user) => user.email === sessionStorage.getItem("email")
+      );
+      if (userStatus.status === "blocked") {
+        navigate("/", { replace: true });
+      }
     }
+    verifyUser();
     dispatch(getUsers());
   }, []);
   function handleAllusers(e) {
@@ -48,6 +61,7 @@ export default function AdminPage() {
       {!isLoading && usersList.allUsers.length == 0 && (
         <p className="text-center">No data found</p>
       )}
+      {message && <DisplayMessage message={message} />}
     </div>
   );
 }

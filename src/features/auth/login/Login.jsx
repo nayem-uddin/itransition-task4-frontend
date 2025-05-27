@@ -7,6 +7,7 @@ import DisplayMessage from "../../../components/DisplayMessage";
 
 export default function Login() {
   const [userInfo, setUserInfo] = useState({});
+
   const navigate = useNavigate();
   function updateUserInfo(field, value) {
     setUserInfo({
@@ -68,7 +69,6 @@ export default function Login() {
             New user? <Link to="/register">Sign up</Link> instead.{" "}
           </p>
         </fieldset>
-        {/* {errorMessage && <DisplayMessage message={errorMessage} />} */}
       </form>
     </>
   );

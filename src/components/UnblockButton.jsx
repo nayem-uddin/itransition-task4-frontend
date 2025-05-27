@@ -34,8 +34,6 @@ export default function UnblockButton() {
           newStatus: "active",
         })
       );
-
-      alert("Successfully unblocked.");
     } else {
       alert("Failed to fetch user data.");
     }

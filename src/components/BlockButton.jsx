@@ -37,8 +37,6 @@ export default function BlockButton() {
           newStatus: "blocked",
         })
       );
-
-      alert("Successfully blocked.");
     } else {
       alert("Failed to fetch user data.");
     }
