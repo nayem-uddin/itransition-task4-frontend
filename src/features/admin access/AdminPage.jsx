@@ -28,7 +28,7 @@ export default function AdminPage() {
       const userStatus = await users.users.find(
         (user) => user.email === sessionStorage.getItem("email")
       );
-      if (userStatus.status === "blocked") {
+      if (!userStatus || userStatus.status === "blocked") {
         navigate("/", { replace: true });
       }
     }
