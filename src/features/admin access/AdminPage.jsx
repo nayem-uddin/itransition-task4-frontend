@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import UserDetails from "../../components/UserDetails";
 import styles from "./ui.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { deselectAllUsers, selectAllUsers } from "./userSlice";
