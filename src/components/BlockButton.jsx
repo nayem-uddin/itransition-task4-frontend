@@ -19,7 +19,11 @@ export default function BlockButton() {
     const newUserStatus = allUsers.find(
       (user) => user.email === sessionStorage.getItem("email")
     );
-    if (!newUserStatus || newUserStatus.status === "blocked") {
+    const userEmails = allUsers.map((user) => user.email);
+    if (
+      !userEmails.includes(sessionStorage.getItem("email")) ||
+      newUserStatus.status === "blocked"
+    ) {
       setTimeout(() => {
         navigate("/", { replace: true });
       }, 3000);
