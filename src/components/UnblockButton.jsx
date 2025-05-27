@@ -16,13 +16,17 @@ export default function UnblockButton() {
         newStatus: "active",
       })
     );
+    const newUserStatus = allUsers.find(
+      (user) => user.email === sessionStorage.getItem("email")
+    );
+    const userEmails = allUsers.map((user) => user.email);
     if (
-      allUsers.find((user) => user.email === sessionStorage.getItem("email"))
-        ?.status === "blocked"
+      !userEmails.includes(sessionStorage.getItem("email")) ||
+      newUserStatus.status === "blocked"
     ) {
       setTimeout(() => {
         navigate("/", { replace: true });
-      }, 5000);
+      }, 3000);
     }
   }
   return (
