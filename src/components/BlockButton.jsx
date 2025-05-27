@@ -1,6 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
-import { blockUnblockUsers } from "../features/admin access/handleAPI";
+import {
+  blockUnblockUsers,
+  getUsers,
+} from "../features/admin access/handleAPI";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 export default function BlockButton() {
   const { allUsers, selectedUsers } = useSelector(
@@ -8,27 +12,38 @@ export default function BlockButton() {
   );
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  function handleClick() {
-    dispatch(
-      blockUnblockUsers({
-        userEmail: sessionStorage.getItem("email"),
-        selectedUsers,
-        newStatus: "blocked",
-      })
-    );
-    const newUserStatus = allUsers.find(
-      (user) => user.email === sessionStorage.getItem("email")
-    );
-    const userEmails = allUsers.map((user) => user.email);
-    if (
-      !userEmails.includes(sessionStorage.getItem("email")) ||
-      newUserStatus.status === "blocked"
-    ) {
-      setTimeout(() => {
+  async function handleClick() {
+    const resultAction = await dispatch(getUsers());
+
+    // check if fulfilled
+    if (getUsers.fulfilled.match(resultAction)) {
+      const updatedUsers = resultAction.payload;
+      const currentUserEmail = sessionStorage.getItem("email");
+
+      const currentUser = updatedUsers.find(
+        (user) => user.email === currentUserEmail
+      );
+
+      if (!currentUser || currentUser.status === "blocked") {
+        alert("You are blocked or deleted by another user.");
         navigate("/", { replace: true });
-      }, 3000);
+        return;
+      }
+
+      dispatch(
+        blockUnblockUsers({
+          userEmail: sessionStorage.getItem("email"),
+          selectedUsers,
+          newStatus: "blocked",
+        })
+      );
+
+      alert("Successfully blocked.");
+    } else {
+      alert("Failed to fetch user data.");
     }
   }
+
   return (
     <>
       <button className="btn btn-danger m-3" onClick={handleClick}>

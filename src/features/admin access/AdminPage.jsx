@@ -32,7 +32,7 @@ export default function AdminPage() {
     <div className={`${styles.usersList}`}>
       {!isLoading && usersList.allUsers.length > 0 && (
         <div>
-          <Toolbar />
+          <Toolbar message={message} />
           <DisplayUsers
             users={usersList.allUsers.toSorted((user1, user2) =>
               user1.firstName.toLowerCase() > user2.firstName.toLowerCase()
@@ -43,9 +43,7 @@ export default function AdminPage() {
           />
         </div>
       )}
-      {message && (
-        <DisplayMessage message={message} usersList={usersList.allUsers} />
-      )}
+
       {isLoading && <LoadingAnim />}
       {!isLoading && usersList.allUsers.length == 0 && (
         <p className="text-center">No data found</p>
